@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Served at github.com/taufiqnagori/taufiq-portfolio → taufiqnagori.github.io/taufiq-portfolio/
+  base: '/taufiq-portfolio/',
   plugins: [react()],
   build: {
     // Three.js is inherently large; splitting it (and the other animation

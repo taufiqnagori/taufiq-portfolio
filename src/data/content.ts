@@ -13,7 +13,9 @@ export const profile = {
   phone: "+91-8530306570",
   github: "https://github.com/taufiqnagori",
   linkedin: "https://www.linkedin.com/in/taufiqnagori/",
-  resumeFile: "/resume.pdf",
+  // BASE_URL-relative so this resolves correctly whether the site is
+  // served at the domain root or at a subpath (e.g. GitHub Pages project sites).
+  resumeFile: `${import.meta.env.BASE_URL}resume.pdf`,
 };
 
 export const education = [
