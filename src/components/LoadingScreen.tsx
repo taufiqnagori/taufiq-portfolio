@@ -23,7 +23,19 @@ export default function LoadingScreen({ onDone }: { onDone: () => void }) {
       }
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    // Hard safety net, independent of the rAF-driven progress above: if a
+    // background/throttled tab or anything else stalls that loop, this
+    // overlay — which sits at z-[100] and captures every click across the
+    // whole page while visible — could otherwise never go away, silently
+    // blocking every link on the site. This guarantees it's gone well
+    // within the actual loading window no matter what.
+    const safety = window.setTimeout(() => setVisible(false), 2000);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(safety);
+    };
   }, []);
 
   return (
